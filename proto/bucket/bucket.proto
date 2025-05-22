@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package bucket;
+
+option go_package = "bucket.v1;bckt";
+
+import "google/api/annotations.proto";
+
+service Bucket {
+  rpc AddToBucket (AddToBucketRequest) returns (AddToBucketResponse) {
+    option (google.api.http) = {
+      post: "/v1/bucket"
+      body: "*"
+    };
+  }
+
+  rpc DelFromBucket (DelFromBucketRequest) returns (DelFromBucketResponse) {
+    option (google.api.http) = {
+      delete: "/v1/bucket/{toy_id}"
+    };
+  }
+
+  rpc GetBucket (GetBucketRequest) returns (GetBucketResponse) {
+    option (google.api.http) = {
+      get: "/v1/bucket"
+    };
+  }
+}
+
+service BucketService {
+  rpc AddToBucket (AddToBucketRequest) returns (AddToBucketResponse);
+  rpc DelFromBucket (DelFromBucketRequest) returns (DelFromBucketResponse);
+  rpc GetBucket (GetBucketRequest) returns (GetBucketResponse);
+}
+
+enum OperationStatus {
+  STATUS_OK = 0;
+  STATUS_INTERNAL_ERROR = 1;
+  STATUS_BUCKET_EMPTY = 2;
+  STATUS_UNAUTHORIZED = 3;
+}
+
+message Toy {
+  int64 toy_id = 1;
+  string name = 2;
+  int64 value = 3;
+  string image_url = 4;
+  int32 quantity = 5;
+}
+
+message AddToBucketRequest {
+  int64 toy_id = 1;
+}
+
+message AddToBucketResponse {
+  OperationStatus status = 1;
+  string msg = 2;
+}
+
+message DelFromBucketRequest {
+  int64 toy_id = 1;
+}
+
+message DelFromBucketResponse {
+  OperationStatus status = 1;
+  string msg = 2;
+}
+
+message GetBucketRequest {}
+
+message GetBucketResponse {
+  repeated Toy toys = 1;
+  int32 quantity = 2;
+}
