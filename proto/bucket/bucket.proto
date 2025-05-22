@@ -49,7 +49,7 @@ message Toy {
 }
 
 message AddToBucketRequest {
-  int64 toy_id = 1;
+  repeated int64 toy_id = 1;
 }
 
 message AddToBucketResponse {
