@@ -22,6 +22,7 @@ const (
 	Bucket_AddToBucket_FullMethodName   = "/bucket.Bucket/AddToBucket"
 	Bucket_DelFromBucket_FullMethodName = "/bucket.Bucket/DelFromBucket"
 	Bucket_GetBucket_FullMethodName     = "/bucket.Bucket/GetBucket"
+	Bucket_CreateBucket_FullMethodName  = "/bucket.Bucket/CreateBucket"
 )
 
 // BucketClient is the client API for Bucket service.
@@ -31,6 +32,7 @@ type BucketClient interface {
 	AddToBucket(ctx context.Context, in *AddToBucketRequest, opts ...grpc.CallOption) (*AddToBucketResponse, error)
 	DelFromBucket(ctx context.Context, in *DelFromBucketRequest, opts ...grpc.CallOption) (*DelFromBucketResponse, error)
 	GetBucket(ctx context.Context, in *GetBucketRequest, opts ...grpc.CallOption) (*GetBucketResponse, error)
+	CreateBucket(ctx context.Context, in *CreateBucketRequest, opts ...grpc.CallOption) (*CreateBucketResponse, error)
 }
 
 type bucketClient struct {
@@ -71,6 +73,16 @@ func (c *bucketClient) GetBucket(ctx context.Context, in *GetBucketRequest, opts
 	return out, nil
 }
 
+func (c *bucketClient) CreateBucket(ctx context.Context, in *CreateBucketRequest, opts ...grpc.CallOption) (*CreateBucketResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateBucketResponse)
+	err := c.cc.Invoke(ctx, Bucket_CreateBucket_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BucketServer is the server API for Bucket service.
 // All implementations must embed UnimplementedBucketServer
 // for forward compatibility.
@@ -78,6 +90,7 @@ type BucketServer interface {
 	AddToBucket(context.Context, *AddToBucketRequest) (*AddToBucketResponse, error)
 	DelFromBucket(context.Context, *DelFromBucketRequest) (*DelFromBucketResponse, error)
 	GetBucket(context.Context, *GetBucketRequest) (*GetBucketResponse, error)
+	CreateBucket(context.Context, *CreateBucketRequest) (*CreateBucketResponse, error)
 	mustEmbedUnimplementedBucketServer()
 }
 
@@ -96,6 +109,9 @@ func (UnimplementedBucketServer) DelFromBucket(context.Context, *DelFromBucketRe
 }
 func (UnimplementedBucketServer) GetBucket(context.Context, *GetBucketRequest) (*GetBucketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBucket not implemented")
+}
+func (UnimplementedBucketServer) CreateBucket(context.Context, *CreateBucketRequest) (*CreateBucketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBucket not implemented")
 }
 func (UnimplementedBucketServer) mustEmbedUnimplementedBucketServer() {}
 func (UnimplementedBucketServer) testEmbeddedByValue()                {}
@@ -172,6 +188,24 @@ func _Bucket_GetBucket_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Bucket_CreateBucket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBucketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BucketServer).CreateBucket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Bucket_CreateBucket_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BucketServer).CreateBucket(ctx, req.(*CreateBucketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Bucket_ServiceDesc is the grpc.ServiceDesc for Bucket service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -191,6 +225,10 @@ var Bucket_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetBucket",
 			Handler:    _Bucket_GetBucket_Handler,
 		},
+		{
+			MethodName: "CreateBucket",
+			Handler:    _Bucket_CreateBucket_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "bucket/bucket.proto",
@@ -200,6 +238,7 @@ const (
 	BucketService_AddToBucket_FullMethodName   = "/bucket.BucketService/AddToBucket"
 	BucketService_DelFromBucket_FullMethodName = "/bucket.BucketService/DelFromBucket"
 	BucketService_GetBucket_FullMethodName     = "/bucket.BucketService/GetBucket"
+	BucketService_CreateBucket_FullMethodName  = "/bucket.BucketService/CreateBucket"
 )
 
 // BucketServiceClient is the client API for BucketService service.
@@ -209,6 +248,7 @@ type BucketServiceClient interface {
 	AddToBucket(ctx context.Context, in *AddToBucketRequest, opts ...grpc.CallOption) (*AddToBucketResponse, error)
 	DelFromBucket(ctx context.Context, in *DelFromBucketRequest, opts ...grpc.CallOption) (*DelFromBucketResponse, error)
 	GetBucket(ctx context.Context, in *GetBucketRequest, opts ...grpc.CallOption) (*GetBucketResponse, error)
+	CreateBucket(ctx context.Context, in *CreateBucketRequest, opts ...grpc.CallOption) (*CreateBucketResponse, error)
 }
 
 type bucketServiceClient struct {
@@ -249,6 +289,16 @@ func (c *bucketServiceClient) GetBucket(ctx context.Context, in *GetBucketReques
 	return out, nil
 }
 
+func (c *bucketServiceClient) CreateBucket(ctx context.Context, in *CreateBucketRequest, opts ...grpc.CallOption) (*CreateBucketResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateBucketResponse)
+	err := c.cc.Invoke(ctx, BucketService_CreateBucket_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BucketServiceServer is the server API for BucketService service.
 // All implementations must embed UnimplementedBucketServiceServer
 // for forward compatibility.
@@ -256,6 +306,7 @@ type BucketServiceServer interface {
 	AddToBucket(context.Context, *AddToBucketRequest) (*AddToBucketResponse, error)
 	DelFromBucket(context.Context, *DelFromBucketRequest) (*DelFromBucketResponse, error)
 	GetBucket(context.Context, *GetBucketRequest) (*GetBucketResponse, error)
+	CreateBucket(context.Context, *CreateBucketRequest) (*CreateBucketResponse, error)
 	mustEmbedUnimplementedBucketServiceServer()
 }
 
@@ -274,6 +325,9 @@ func (UnimplementedBucketServiceServer) DelFromBucket(context.Context, *DelFromB
 }
 func (UnimplementedBucketServiceServer) GetBucket(context.Context, *GetBucketRequest) (*GetBucketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBucket not implemented")
+}
+func (UnimplementedBucketServiceServer) CreateBucket(context.Context, *CreateBucketRequest) (*CreateBucketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBucket not implemented")
 }
 func (UnimplementedBucketServiceServer) mustEmbedUnimplementedBucketServiceServer() {}
 func (UnimplementedBucketServiceServer) testEmbeddedByValue()                       {}
@@ -350,6 +404,24 @@ func _BucketService_GetBucket_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BucketService_CreateBucket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBucketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BucketServiceServer).CreateBucket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BucketService_CreateBucket_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BucketServiceServer).CreateBucket(ctx, req.(*CreateBucketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BucketService_ServiceDesc is the grpc.ServiceDesc for BucketService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -368,6 +440,10 @@ var BucketService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBucket",
 			Handler:    _BucketService_GetBucket_Handler,
+		},
+		{
+			MethodName: "CreateBucket",
+			Handler:    _BucketService_CreateBucket_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -25,12 +25,19 @@ service Bucket {
       get: "/v1/bucket"
     };
   }
+
+  rpc CreateBucket (CreateBucketRequest) returns (CreateBucketResponse) {
+    option (google.api.http) = {
+      post: "/v1/createBucket"
+    };
+  }
 }
 
 service BucketService {
   rpc AddToBucket (AddToBucketRequest) returns (AddToBucketResponse);
   rpc DelFromBucket (DelFromBucketRequest) returns (DelFromBucketResponse);
   rpc GetBucket (GetBucketRequest) returns (GetBucketResponse);
+  rpc CreateBucket (CreateBucketRequest) returns (CreateBucketResponse);
 }
 
 enum OperationStatus {
@@ -79,4 +86,11 @@ message GetBucketRequest {
 message GetBucketResponse {
   repeated Toy toys = 1;
   int32 quantity = 2;
+}
+
+message CreateBucketRequest {}
+
+message CreateBucketResponse{
+  OperationStatus status = 1;
+  string msg = 2;
 }
