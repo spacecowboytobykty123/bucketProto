@@ -150,16 +150,68 @@ func (x *Toy) GetQuantity() int32 {
 	return 0
 }
 
+type ToyBucket struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ToyId         int64                  `protobuf:"varint,1,opt,name=toy_id,json=toyId,proto3" json:"toy_id,omitempty"`
+	Quantity      int32                  `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToyBucket) Reset() {
+	*x = ToyBucket{}
+	mi := &file_bucket_bucket_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToyBucket) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToyBucket) ProtoMessage() {}
+
+func (x *ToyBucket) ProtoReflect() protoreflect.Message {
+	mi := &file_bucket_bucket_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToyBucket.ProtoReflect.Descriptor instead.
+func (*ToyBucket) Descriptor() ([]byte, []int) {
+	return file_bucket_bucket_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ToyBucket) GetToyId() int64 {
+	if x != nil {
+		return x.ToyId
+	}
+	return 0
+}
+
+func (x *ToyBucket) GetQuantity() int32 {
+	if x != nil {
+		return x.Quantity
+	}
+	return 0
+}
+
 type AddToBucketRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ToyId         []int64                `protobuf:"varint,1,rep,packed,name=toy_id,json=toyId,proto3" json:"toy_id,omitempty"`
+	Toys          []*ToyBucket           `protobuf:"bytes,1,rep,name=toys,proto3" json:"toys,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AddToBucketRequest) Reset() {
 	*x = AddToBucketRequest{}
-	mi := &file_bucket_bucket_proto_msgTypes[1]
+	mi := &file_bucket_bucket_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -171,7 +223,7 @@ func (x *AddToBucketRequest) String() string {
 func (*AddToBucketRequest) ProtoMessage() {}
 
 func (x *AddToBucketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_bucket_bucket_proto_msgTypes[1]
+	mi := &file_bucket_bucket_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -184,12 +236,12 @@ func (x *AddToBucketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddToBucketRequest.ProtoReflect.Descriptor instead.
 func (*AddToBucketRequest) Descriptor() ([]byte, []int) {
-	return file_bucket_bucket_proto_rawDescGZIP(), []int{1}
+	return file_bucket_bucket_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *AddToBucketRequest) GetToyId() []int64 {
+func (x *AddToBucketRequest) GetToys() []*ToyBucket {
 	if x != nil {
-		return x.ToyId
+		return x.Toys
 	}
 	return nil
 }
@@ -204,7 +256,7 @@ type AddToBucketResponse struct {
 
 func (x *AddToBucketResponse) Reset() {
 	*x = AddToBucketResponse{}
-	mi := &file_bucket_bucket_proto_msgTypes[2]
+	mi := &file_bucket_bucket_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -216,7 +268,7 @@ func (x *AddToBucketResponse) String() string {
 func (*AddToBucketResponse) ProtoMessage() {}
 
 func (x *AddToBucketResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_bucket_bucket_proto_msgTypes[2]
+	mi := &file_bucket_bucket_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -229,7 +281,7 @@ func (x *AddToBucketResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddToBucketResponse.ProtoReflect.Descriptor instead.
 func (*AddToBucketResponse) Descriptor() ([]byte, []int) {
-	return file_bucket_bucket_proto_rawDescGZIP(), []int{2}
+	return file_bucket_bucket_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AddToBucketResponse) GetStatus() OperationStatus {
@@ -255,7 +307,7 @@ type DelFromBucketRequest struct {
 
 func (x *DelFromBucketRequest) Reset() {
 	*x = DelFromBucketRequest{}
-	mi := &file_bucket_bucket_proto_msgTypes[3]
+	mi := &file_bucket_bucket_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -267,7 +319,7 @@ func (x *DelFromBucketRequest) String() string {
 func (*DelFromBucketRequest) ProtoMessage() {}
 
 func (x *DelFromBucketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_bucket_bucket_proto_msgTypes[3]
+	mi := &file_bucket_bucket_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -280,7 +332,7 @@ func (x *DelFromBucketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DelFromBucketRequest.ProtoReflect.Descriptor instead.
 func (*DelFromBucketRequest) Descriptor() ([]byte, []int) {
-	return file_bucket_bucket_proto_rawDescGZIP(), []int{3}
+	return file_bucket_bucket_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DelFromBucketRequest) GetToyId() int64 {
@@ -300,7 +352,7 @@ type DelFromBucketResponse struct {
 
 func (x *DelFromBucketResponse) Reset() {
 	*x = DelFromBucketResponse{}
-	mi := &file_bucket_bucket_proto_msgTypes[4]
+	mi := &file_bucket_bucket_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -312,7 +364,7 @@ func (x *DelFromBucketResponse) String() string {
 func (*DelFromBucketResponse) ProtoMessage() {}
 
 func (x *DelFromBucketResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_bucket_bucket_proto_msgTypes[4]
+	mi := &file_bucket_bucket_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -325,7 +377,7 @@ func (x *DelFromBucketResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DelFromBucketResponse.ProtoReflect.Descriptor instead.
 func (*DelFromBucketResponse) Descriptor() ([]byte, []int) {
-	return file_bucket_bucket_proto_rawDescGZIP(), []int{4}
+	return file_bucket_bucket_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *DelFromBucketResponse) GetStatus() OperationStatus {
@@ -350,7 +402,7 @@ type GetBucketRequest struct {
 
 func (x *GetBucketRequest) Reset() {
 	*x = GetBucketRequest{}
-	mi := &file_bucket_bucket_proto_msgTypes[5]
+	mi := &file_bucket_bucket_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -362,7 +414,7 @@ func (x *GetBucketRequest) String() string {
 func (*GetBucketRequest) ProtoMessage() {}
 
 func (x *GetBucketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_bucket_bucket_proto_msgTypes[5]
+	mi := &file_bucket_bucket_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -375,7 +427,7 @@ func (x *GetBucketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBucketRequest.ProtoReflect.Descriptor instead.
 func (*GetBucketRequest) Descriptor() ([]byte, []int) {
-	return file_bucket_bucket_proto_rawDescGZIP(), []int{5}
+	return file_bucket_bucket_proto_rawDescGZIP(), []int{6}
 }
 
 type GetBucketResponse struct {
@@ -388,7 +440,7 @@ type GetBucketResponse struct {
 
 func (x *GetBucketResponse) Reset() {
 	*x = GetBucketResponse{}
-	mi := &file_bucket_bucket_proto_msgTypes[6]
+	mi := &file_bucket_bucket_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -400,7 +452,7 @@ func (x *GetBucketResponse) String() string {
 func (*GetBucketResponse) ProtoMessage() {}
 
 func (x *GetBucketResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_bucket_bucket_proto_msgTypes[6]
+	mi := &file_bucket_bucket_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -413,7 +465,7 @@ func (x *GetBucketResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBucketResponse.ProtoReflect.Descriptor instead.
 func (*GetBucketResponse) Descriptor() ([]byte, []int) {
-	return file_bucket_bucket_proto_rawDescGZIP(), []int{6}
+	return file_bucket_bucket_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetBucketResponse) GetToys() []*Toy {
@@ -440,9 +492,12 @@ const file_bucket_bucket_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
 	"\x05value\x18\x03 \x01(\x03R\x05value\x12\x1b\n" +
 	"\timage_url\x18\x04 \x01(\tR\bimageUrl\x12\x1a\n" +
-	"\bquantity\x18\x05 \x01(\x05R\bquantity\"+\n" +
-	"\x12AddToBucketRequest\x12\x15\n" +
-	"\x06toy_id\x18\x01 \x03(\x03R\x05toyId\"X\n" +
+	"\bquantity\x18\x05 \x01(\x05R\bquantity\">\n" +
+	"\tToyBucket\x12\x15\n" +
+	"\x06toy_id\x18\x01 \x01(\x03R\x05toyId\x12\x1a\n" +
+	"\bquantity\x18\x02 \x01(\x05R\bquantity\";\n" +
+	"\x12AddToBucketRequest\x12%\n" +
+	"\x04toys\x18\x01 \x03(\v2\x11.bucket.ToyBucketR\x04toys\"X\n" +
 	"\x13AddToBucketResponse\x12/\n" +
 	"\x06status\x18\x01 \x01(\x0e2\x17.bucket.OperationStatusR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\"-\n" +
@@ -484,38 +539,40 @@ func file_bucket_bucket_proto_rawDescGZIP() []byte {
 }
 
 var file_bucket_bucket_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_bucket_bucket_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_bucket_bucket_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_bucket_bucket_proto_goTypes = []any{
 	(OperationStatus)(0),          // 0: bucket.OperationStatus
 	(*Toy)(nil),                   // 1: bucket.Toy
-	(*AddToBucketRequest)(nil),    // 2: bucket.AddToBucketRequest
-	(*AddToBucketResponse)(nil),   // 3: bucket.AddToBucketResponse
-	(*DelFromBucketRequest)(nil),  // 4: bucket.DelFromBucketRequest
-	(*DelFromBucketResponse)(nil), // 5: bucket.DelFromBucketResponse
-	(*GetBucketRequest)(nil),      // 6: bucket.GetBucketRequest
-	(*GetBucketResponse)(nil),     // 7: bucket.GetBucketResponse
+	(*ToyBucket)(nil),             // 2: bucket.ToyBucket
+	(*AddToBucketRequest)(nil),    // 3: bucket.AddToBucketRequest
+	(*AddToBucketResponse)(nil),   // 4: bucket.AddToBucketResponse
+	(*DelFromBucketRequest)(nil),  // 5: bucket.DelFromBucketRequest
+	(*DelFromBucketResponse)(nil), // 6: bucket.DelFromBucketResponse
+	(*GetBucketRequest)(nil),      // 7: bucket.GetBucketRequest
+	(*GetBucketResponse)(nil),     // 8: bucket.GetBucketResponse
 }
 var file_bucket_bucket_proto_depIdxs = []int32{
-	0, // 0: bucket.AddToBucketResponse.status:type_name -> bucket.OperationStatus
-	0, // 1: bucket.DelFromBucketResponse.status:type_name -> bucket.OperationStatus
-	1, // 2: bucket.GetBucketResponse.toys:type_name -> bucket.Toy
-	2, // 3: bucket.Bucket.AddToBucket:input_type -> bucket.AddToBucketRequest
-	4, // 4: bucket.Bucket.DelFromBucket:input_type -> bucket.DelFromBucketRequest
-	6, // 5: bucket.Bucket.GetBucket:input_type -> bucket.GetBucketRequest
-	2, // 6: bucket.BucketService.AddToBucket:input_type -> bucket.AddToBucketRequest
-	4, // 7: bucket.BucketService.DelFromBucket:input_type -> bucket.DelFromBucketRequest
-	6, // 8: bucket.BucketService.GetBucket:input_type -> bucket.GetBucketRequest
-	3, // 9: bucket.Bucket.AddToBucket:output_type -> bucket.AddToBucketResponse
-	5, // 10: bucket.Bucket.DelFromBucket:output_type -> bucket.DelFromBucketResponse
-	7, // 11: bucket.Bucket.GetBucket:output_type -> bucket.GetBucketResponse
-	3, // 12: bucket.BucketService.AddToBucket:output_type -> bucket.AddToBucketResponse
-	5, // 13: bucket.BucketService.DelFromBucket:output_type -> bucket.DelFromBucketResponse
-	7, // 14: bucket.BucketService.GetBucket:output_type -> bucket.GetBucketResponse
-	9, // [9:15] is the sub-list for method output_type
-	3, // [3:9] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	2,  // 0: bucket.AddToBucketRequest.toys:type_name -> bucket.ToyBucket
+	0,  // 1: bucket.AddToBucketResponse.status:type_name -> bucket.OperationStatus
+	0,  // 2: bucket.DelFromBucketResponse.status:type_name -> bucket.OperationStatus
+	1,  // 3: bucket.GetBucketResponse.toys:type_name -> bucket.Toy
+	3,  // 4: bucket.Bucket.AddToBucket:input_type -> bucket.AddToBucketRequest
+	5,  // 5: bucket.Bucket.DelFromBucket:input_type -> bucket.DelFromBucketRequest
+	7,  // 6: bucket.Bucket.GetBucket:input_type -> bucket.GetBucketRequest
+	3,  // 7: bucket.BucketService.AddToBucket:input_type -> bucket.AddToBucketRequest
+	5,  // 8: bucket.BucketService.DelFromBucket:input_type -> bucket.DelFromBucketRequest
+	7,  // 9: bucket.BucketService.GetBucket:input_type -> bucket.GetBucketRequest
+	4,  // 10: bucket.Bucket.AddToBucket:output_type -> bucket.AddToBucketResponse
+	6,  // 11: bucket.Bucket.DelFromBucket:output_type -> bucket.DelFromBucketResponse
+	8,  // 12: bucket.Bucket.GetBucket:output_type -> bucket.GetBucketResponse
+	4,  // 13: bucket.BucketService.AddToBucket:output_type -> bucket.AddToBucketResponse
+	6,  // 14: bucket.BucketService.DelFromBucket:output_type -> bucket.DelFromBucketResponse
+	8,  // 15: bucket.BucketService.GetBucket:output_type -> bucket.GetBucketResponse
+	10, // [10:16] is the sub-list for method output_type
+	4,  // [4:10] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_bucket_bucket_proto_init() }
@@ -529,7 +586,7 @@ func file_bucket_bucket_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_bucket_bucket_proto_rawDesc), len(file_bucket_bucket_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   2,
 		},

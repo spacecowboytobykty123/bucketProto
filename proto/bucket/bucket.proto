@@ -48,8 +48,13 @@ message Toy {
   int32 quantity = 5;
 }
 
+message ToyBucket {
+  int64 toy_id = 1;
+  int32 quantity = 2;
+}
+
 message AddToBucketRequest {
-  repeated int64 toy_id = 1;
+  repeated ToyBucket toys = 1;
 }
 
 message AddToBucketResponse {
