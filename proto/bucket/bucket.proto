@@ -55,6 +55,7 @@ message ToyBucket {
 
 message AddToBucketRequest {
   repeated ToyBucket toys = 1;
+  int64 bucket_id = 2;
 }
 
 message AddToBucketResponse {

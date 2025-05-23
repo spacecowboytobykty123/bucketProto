@@ -205,6 +205,7 @@ func (x *ToyBucket) GetQuantity() int32 {
 type AddToBucketRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Toys          []*ToyBucket           `protobuf:"bytes,1,rep,name=toys,proto3" json:"toys,omitempty"`
+	BucketId      int64                  `protobuf:"varint,2,opt,name=bucket_id,json=bucketId,proto3" json:"bucket_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -244,6 +245,13 @@ func (x *AddToBucketRequest) GetToys() []*ToyBucket {
 		return x.Toys
 	}
 	return nil
+}
+
+func (x *AddToBucketRequest) GetBucketId() int64 {
+	if x != nil {
+		return x.BucketId
+	}
+	return 0
 }
 
 type AddToBucketResponse struct {
@@ -495,9 +503,10 @@ const file_bucket_bucket_proto_rawDesc = "" +
 	"\bquantity\x18\x05 \x01(\x05R\bquantity\">\n" +
 	"\tToyBucket\x12\x15\n" +
 	"\x06toy_id\x18\x01 \x01(\x03R\x05toyId\x12\x1a\n" +
-	"\bquantity\x18\x02 \x01(\x05R\bquantity\";\n" +
+	"\bquantity\x18\x02 \x01(\x05R\bquantity\"X\n" +
 	"\x12AddToBucketRequest\x12%\n" +
-	"\x04toys\x18\x01 \x03(\v2\x11.bucket.ToyBucketR\x04toys\"X\n" +
+	"\x04toys\x18\x01 \x03(\v2\x11.bucket.ToyBucketR\x04toys\x12\x1b\n" +
+	"\tbucket_id\x18\x02 \x01(\x03R\bbucketId\"X\n" +
 	"\x13AddToBucketResponse\x12/\n" +
 	"\x06status\x18\x01 \x01(\x0e2\x17.bucket.OperationStatusR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\"-\n" +
