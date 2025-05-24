@@ -404,7 +404,6 @@ func (x *DelFromBucketResponse) GetMsg() string {
 
 type GetBucketRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BucketId      int64                  `protobuf:"varint,1,opt,name=bucket_id,json=bucketId,proto3" json:"bucket_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -437,13 +436,6 @@ func (x *GetBucketRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetBucketRequest.ProtoReflect.Descriptor instead.
 func (*GetBucketRequest) Descriptor() ([]byte, []int) {
 	return file_bucket_bucket_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *GetBucketRequest) GetBucketId() int64 {
-	if x != nil {
-		return x.BucketId
-	}
-	return 0
 }
 
 type GetBucketResponse struct {
@@ -610,9 +602,8 @@ const file_bucket_bucket_proto_rawDesc = "" +
 	"\x06toy_id\x18\x01 \x01(\x03R\x05toyId\"Z\n" +
 	"\x15DelFromBucketResponse\x12/\n" +
 	"\x06status\x18\x01 \x01(\x0e2\x17.bucket.OperationStatusR\x06status\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\"/\n" +
-	"\x10GetBucketRequest\x12\x1b\n" +
-	"\tbucket_id\x18\x01 \x01(\x03R\bbucketId\"P\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\"\x12\n" +
+	"\x10GetBucketRequest\"P\n" +
 	"\x11GetBucketResponse\x12\x1f\n" +
 	"\x04toys\x18\x01 \x03(\v2\v.bucket.ToyR\x04toys\x12\x1a\n" +
 	"\bquantity\x18\x02 \x01(\x05R\bquantity\"\x15\n" +

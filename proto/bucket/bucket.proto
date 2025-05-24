@@ -79,9 +79,7 @@ message DelFromBucketResponse {
   string msg = 2;
 }
 
-message GetBucketRequest {
-  int64 bucket_id = 1;
-}
+message GetBucketRequest {}
 
 message GetBucketResponse {
   repeated Toy toys = 1;
