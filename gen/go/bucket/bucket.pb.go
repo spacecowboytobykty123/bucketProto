@@ -7,6 +7,7 @@
 package bckt
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -574,7 +575,7 @@ var File_bucket_bucket_proto protoreflect.FileDescriptor
 
 const file_bucket_bucket_proto_rawDesc = "" +
 	"\n" +
-	"\x13bucket/bucket.proto\x12\x06bucket\x1a\x1cgoogle/api/annotations.proto\"\x7f\n" +
+	"\x13bucket/bucket.proto\x12\x06bucket\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x7f\n" +
 	"\x03Toy\x12\x15\n" +
 	"\x06toy_id\x18\x01 \x01(\x03R\x05toyId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
@@ -606,19 +607,22 @@ const file_bucket_bucket_proto_rawDesc = "" +
 	"\tSTATUS_OK\x10\x00\x12\x19\n" +
 	"\x15STATUS_INTERNAL_ERROR\x10\x01\x12\x17\n" +
 	"\x13STATUS_BUCKET_EMPTY\x10\x02\x12\x17\n" +
-	"\x13STATUS_UNAUTHORIZED\x10\x032\x8d\x03\n" +
-	"\x06Bucket\x12]\n" +
-	"\vAddToBucket\x12\x1a.bucket.AddToBucketRequest\x1a\x1b.bucket.AddToBucketResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
-	"/v1/bucket\x12i\n" +
-	"\rDelFromBucket\x12\x1c.bucket.DelFromBucketRequest\x1a\x1d.bucket.DelFromBucketResponse\"\x1b\x82\xd3\xe4\x93\x02\x15*\x13/v1/bucket/{toy_id}\x12T\n" +
-	"\tGetBucket\x12\x18.bucket.GetBucketRequest\x1a\x19.bucket.GetBucketResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
-	"/v1/bucket\x12c\n" +
-	"\fCreateBucket\x12\x1b.bucket.CreateBucketRequest\x1a\x1c.bucket.CreateBucketResponse\"\x18\x82\xd3\xe4\x93\x02\x12\"\x10/v1/createBucket2\xb2\x02\n" +
+	"\x13STATUS_UNAUTHORIZED\x10\x032\xb2\x05\n" +
+	"\x06Bucket\x12\x95\x01\n" +
+	"\vAddToBucket\x12\x1a.bucket.AddToBucketRequest\x1a\x1b.bucket.AddToBucketResponse\"M\x92A5\x12\x11Add toy to bucket\x1a Adds a toy to the user's bucket.\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
+	"/v1/bucket\x12\xbe\x01\n" +
+	"\rDelFromBucket\x12\x1c.bucket.DelFromBucketRequest\x1a\x1d.bucket.DelFromBucketResponse\"p\x92AR\x12\x16Remove toy from bucket\x1a8Deletes a specific toy from the user's bucket by toy ID.\x82\xd3\xe4\x93\x02\x15*\x13/v1/bucket/{toy_id}\x12\xa8\x01\n" +
+	"\tGetBucket\x12\x18.bucket.GetBucketRequest\x1a\x19.bucket.GetBucketResponse\"f\x92AQ\x12\x13Get bucket contents\x1a:Retrieves the list of toys currently in the user's bucket.\x82\xd3\xe4\x93\x02\f\x12\n" +
+	"/v1/bucket\x12\xa3\x01\n" +
+	"\fCreateBucket\x12\x1b.bucket.CreateBucketRequest\x1a\x1c.bucket.CreateBucketResponse\"X\x92A=\x12\x13Create a new bucket\x1a&Initializes a new bucket for the user.\x82\xd3\xe4\x93\x02\x12\"\x10/v1/createBucket2\xb2\x02\n" +
 	"\rBucketService\x12F\n" +
 	"\vAddToBucket\x12\x1a.bucket.AddToBucketRequest\x1a\x1b.bucket.AddToBucketResponse\x12L\n" +
 	"\rDelFromBucket\x12\x1c.bucket.DelFromBucketRequest\x1a\x1d.bucket.DelFromBucketResponse\x12@\n" +
 	"\tGetBucket\x12\x18.bucket.GetBucketRequest\x1a\x19.bucket.GetBucketResponse\x12I\n" +
-	"\fCreateBucket\x12\x1b.bucket.CreateBucketRequest\x1a\x1c.bucket.CreateBucketResponseB\x10Z\x0ebucket.v1;bcktb\x06proto3"
+	"\fCreateBucket\x12\x1b.bucket.CreateBucketRequest\x1a\x1c.bucket.CreateBucketResponseB\xf7\x01\x92A\xe3\x01\x12\xb9\x01\n" +
+	"\n" +
+	"Bucket API\x12fAPI for managing a user's bucket, including adding, removing, viewing toys, and creating a new bucket.\">\n" +
+	"\fSupport Team\x12\x16https://yourdomain.com\x1a\x16support@yourdomain.com2\x031.0*\x01\x022\x10application/json:\x10application/jsonZ\x0ebucket.v1;bcktb\x06proto3"
 
 var (
 	file_bucket_bucket_proto_rawDescOnce sync.Once

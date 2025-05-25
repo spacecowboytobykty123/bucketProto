@@ -244,6 +244,8 @@ const (
 // BucketServiceClient is the client API for BucketService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Internal or alternate service definition without HTTP bindings
 type BucketServiceClient interface {
 	AddToBucket(ctx context.Context, in *AddToBucketRequest, opts ...grpc.CallOption) (*AddToBucketResponse, error)
 	DelFromBucket(ctx context.Context, in *DelFromBucketRequest, opts ...grpc.CallOption) (*DelFromBucketResponse, error)
@@ -302,6 +304,8 @@ func (c *bucketServiceClient) CreateBucket(ctx context.Context, in *CreateBucket
 // BucketServiceServer is the server API for BucketService service.
 // All implementations must embed UnimplementedBucketServiceServer
 // for forward compatibility.
+//
+// Internal or alternate service definition without HTTP bindings
 type BucketServiceServer interface {
 	AddToBucket(context.Context, *AddToBucketRequest) (*AddToBucketResponse, error)
 	DelFromBucket(context.Context, *DelFromBucketRequest) (*DelFromBucketResponse, error)

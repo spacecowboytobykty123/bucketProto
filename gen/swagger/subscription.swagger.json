@@ -1,0 +1,287 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Bucket API",
+    "description": "API for managing a user's bucket, including adding, removing, viewing toys, and creating a new bucket.",
+    "version": "1.0",
+    "contact": {
+      "name": "Support Team",
+      "url": "https://yourdomain.com",
+      "email": "support@yourdomain.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "Bucket"
+    },
+    {
+      "name": "BucketService"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/bucket": {
+      "get": {
+        "summary": "Get bucket contents",
+        "description": "Retrieves the list of toys currently in the user's bucket.",
+        "operationId": "Bucket_GetBucket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/bucketGetBucketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Bucket"
+        ]
+      },
+      "post": {
+        "summary": "Add toy to bucket",
+        "description": "Adds a toy to the user's bucket.",
+        "operationId": "Bucket_AddToBucket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/bucketAddToBucketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/bucketAddToBucketRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Bucket"
+        ]
+      }
+    },
+    "/v1/bucket/{toyId}": {
+      "delete": {
+        "summary": "Remove toy from bucket",
+        "description": "Deletes a specific toy from the user's bucket by toy ID.",
+        "operationId": "Bucket_DelFromBucket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/bucketDelFromBucketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "toyId",
+            "in": "path",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "int64"
+            },
+            "collectionFormat": "csv",
+            "minItems": 1
+          }
+        ],
+        "tags": [
+          "Bucket"
+        ]
+      }
+    },
+    "/v1/createBucket": {
+      "post": {
+        "summary": "Create a new bucket",
+        "description": "Initializes a new bucket for the user.",
+        "operationId": "Bucket_CreateBucket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/bucketCreateBucketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Bucket"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "bucketAddToBucketRequest": {
+      "type": "object",
+      "properties": {
+        "toys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/bucketToyBucket"
+          }
+        }
+      }
+    },
+    "bucketAddToBucketResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/bucketOperationStatus"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "bucketCreateBucketResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/bucketOperationStatus"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "bucketDelFromBucketResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/bucketOperationStatus"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "bucketGetBucketResponse": {
+      "type": "object",
+      "properties": {
+        "toys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/bucketToy"
+          }
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "bucketOperationStatus": {
+      "type": "string",
+      "enum": [
+        "STATUS_OK",
+        "STATUS_INTERNAL_ERROR",
+        "STATUS_BUCKET_EMPTY",
+        "STATUS_UNAUTHORIZED"
+      ],
+      "default": "STATUS_OK"
+    },
+    "bucketToy": {
+      "type": "object",
+      "properties": {
+        "toyId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "int64"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "bucketToyBucket": {
+      "type": "object",
+      "properties": {
+        "toyId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

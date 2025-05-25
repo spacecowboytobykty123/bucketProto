@@ -5,6 +5,23 @@ package bucket;
 option go_package = "bucket.v1;bckt";
 
 import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Bucket API";
+    version: "1.0";
+    description: "API for managing a user's bucket, including adding, removing, viewing toys, and creating a new bucket.";
+    contact: {
+      name: "Support Team";
+      url: "https://yourdomain.com";
+      email: "support@yourdomain.com";
+    }
+  };
+  schemes: HTTPS;
+  consumes: "application/json";
+  produces: "application/json";
+};
 
 service Bucket {
   rpc AddToBucket (AddToBucketRequest) returns (AddToBucketResponse) {
@@ -12,11 +29,19 @@ service Bucket {
       post: "/v1/bucket"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Add toy to bucket"
+      description: "Adds a toy to the user's bucket."
+    };
   }
 
   rpc DelFromBucket (DelFromBucketRequest) returns (DelFromBucketResponse) {
     option (google.api.http) = {
       delete: "/v1/bucket/{toy_id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Remove toy from bucket"
+      description: "Deletes a specific toy from the user's bucket by toy ID."
     };
   }
 
@@ -24,15 +49,24 @@ service Bucket {
     option (google.api.http) = {
       get: "/v1/bucket"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Get bucket contents"
+      description: "Retrieves the list of toys currently in the user's bucket."
+    };
   }
 
   rpc CreateBucket (CreateBucketRequest) returns (CreateBucketResponse) {
     option (google.api.http) = {
       post: "/v1/createBucket"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Create a new bucket"
+      description: "Initializes a new bucket for the user."
+    };
   }
 }
 
+// Internal or alternate service definition without HTTP bindings
 service BucketService {
   rpc AddToBucket (AddToBucketRequest) returns (AddToBucketResponse);
   rpc DelFromBucket (DelFromBucketRequest) returns (DelFromBucketResponse);
