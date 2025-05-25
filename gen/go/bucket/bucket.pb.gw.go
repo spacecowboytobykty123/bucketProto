@@ -71,7 +71,7 @@ func request_Bucket_DelFromBucket_0(ctx context.Context, marshaler runtime.Marsh
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "toy_id")
 	}
-	protoReq.ToyId, err = runtime.Int64(val)
+	protoReq.ToyId, err = runtime.Int64Slice(val, ",")
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "toy_id", err)
 	}
@@ -89,7 +89,7 @@ func local_request_Bucket_DelFromBucket_0(ctx context.Context, marshaler runtime
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "toy_id")
 	}
-	protoReq.ToyId, err = runtime.Int64(val)
+	protoReq.ToyId, err = runtime.Int64Slice(val, ",")
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "toy_id", err)
 	}

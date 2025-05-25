@@ -300,7 +300,7 @@ func (x *AddToBucketResponse) GetMsg() string {
 
 type DelFromBucketRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ToyId         int64                  `protobuf:"varint,1,opt,name=toy_id,json=toyId,proto3" json:"toy_id,omitempty"`
+	ToyId         []int64                `protobuf:"varint,1,rep,packed,name=toy_id,json=toyId,proto3" json:"toy_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -335,11 +335,11 @@ func (*DelFromBucketRequest) Descriptor() ([]byte, []int) {
 	return file_bucket_bucket_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *DelFromBucketRequest) GetToyId() int64 {
+func (x *DelFromBucketRequest) GetToyId() []int64 {
 	if x != nil {
 		return x.ToyId
 	}
-	return 0
+	return nil
 }
 
 type DelFromBucketResponse struct {
@@ -590,7 +590,7 @@ const file_bucket_bucket_proto_rawDesc = "" +
 	"\x06status\x18\x01 \x01(\x0e2\x17.bucket.OperationStatusR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\"-\n" +
 	"\x14DelFromBucketRequest\x12\x15\n" +
-	"\x06toy_id\x18\x01 \x01(\x03R\x05toyId\"Z\n" +
+	"\x06toy_id\x18\x01 \x03(\x03R\x05toyId\"Z\n" +
 	"\x15DelFromBucketResponse\x12/\n" +
 	"\x06status\x18\x01 \x01(\x0e2\x17.bucket.OperationStatusR\x06status\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\"\x12\n" +
